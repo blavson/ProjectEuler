@@ -1,7 +1,4 @@
-class Matrix:
-   def __init__(self):
-#     self.matrix = [[0] * 20] *20
-      self.m = [    [ 8,  2,  22,  97,  38,  15,   0,  40,   0,  75,   4,   5,   7,  78,  52,  12,  50,   77,   91,   8],
+m =               [ [ 8,  2,  22,  97,  38,  15,   0,  40,   0,  75,   4,   5,   7,  78,  52,  12,  50,   77,   91,   8],
                     [49, 49,  99,  40,  17,  81,  18,  57,  60,  87,  17,  40,  98,  43,  69,  48,   4,   56,   62,   0],
                     [81, 49,  31,  73,  55,  79,  14,  29,  93,  71,  40,  67,  53,  88,  30,   3,  49,   13,   36,  65],
                     [52, 70,  95,  23,   4,  60,  11,  42,  69,  24,  68,  56,   1,  32,  56,  71,  37,    2,   36,  91],
@@ -22,35 +19,49 @@ class Matrix:
                     [20, 73,  35,  29,  78,  31,  90,   1,  74,  31,  49,  71,  48,  86,  81,  16,  23,   57,    5,  54],
                     [ 1, 70,  54,  71,  83,  51,  54,  69,  16,  92,  33,  48,  61,  43,  52,   1,  89,   19,   67,  48]
                     ]
-   def __getitem__(self,index, index2):
-      return self.m[index][index2]
-    
-   def findMax(self, m1, i, j):
-      mx = 0
-      for k in range(-1, 1):
-         s = 0
-         for t in range(-1,1):
-            s += m1[i+k][j+t]
-         if (s > mx):
-            mx = s
-      if (m1[i-1][j-1] + m1[i][j] + m1[i+1][j+1] > mx):
-         mx = m1[i-1][j-1] + m1[i][j] + m1[i+1][j+1]
-      if (m1[i+1][j-1] + m1[i][j] + m1[i-1][j+1] > mx):
-         mx = m1[i+1][j-1] + m1[i][j] + m1[i-1][j+1]
-      return mx
+  
+def findMax(m1, i, j):
+   mx = 0
+   s = 1
+   for k in range(0, 4):
+      s =1
+      for t in range(0,4):
+         s *= m1[i+k][j+t]
+      if (s > mx):
+         mx = s
+
+   for k in range(0, 4):
+      s =1
+      for t in range(0,4):
+         s *= m1[j+t][i+k]
+      if (s > mx):
+         mx = s
+         
+#Diagonal from top left to bottom right      
+   s = 1         
+   for k in range(0, 4):
+      s *= m1[i+k][j+k]
+      if (s > mx):
+         mx = s
+         
+#diagonal from bottom left to top right
+   s = 1         
+   for k in range(0, 4):
+      s *= m1[i+3-k][j+k]
+      if (s > mx):
+         mx = s
+
+   return mx
       
-   def justTest(self):
-      gmx = 0
-      for i in range(1, 19):
-         print('\n')
-         for j in range(1, 19):
-            mx = self.findMax(m ,i,j)
+def justTest(m):
+   gmx = 0
+   for i in range(0, 16):
+      for j in range(0, 16):
+         mx = findMax(m ,i,j)
          if (mx > gmx):
             gmx = mx      
-      return gmx
+#            print(gmx)
+   return gmx
       
-                  
-m = Matrix()
-m.justTest()         
 
-         
+print(justTest(m))
