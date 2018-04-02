@@ -10,6 +10,7 @@ class node():
             self.left = n
         else:
             self.left.number = n.number
+        return self            
 
 
     def addRightNode(self, n):
@@ -17,7 +18,7 @@ class node():
             self.right = n
         else:            
             self.right.number = n.number
-
+        return self
         
 class Tree():
     root = None
@@ -32,11 +33,11 @@ class Tree():
         if current_node is not None:
             print(current_node.number)
             if current_node.left is not None and current_node.right is not None:
-                if current_node.left.number > current_node.right.number:
-                    self.s += current_node.left.number
+#                if current_node.left.number > current_node.right.number:
+#                    self.s += current_node.left.number
                     self.printAll(current_node.left)
-                else:
-                    self.s += current_node.right.number
+#                else:
+ #                   self.s += current_node.right.number
                     self.printAll(current_node.right)
         
         
@@ -45,12 +46,20 @@ root = node(75)
 t = Tree(root)
 
 root.addLeftNode(node(95))
-root.addRightNode(node(64))
 root.left.addLeftNode(node(17))
+root.left.left.addLeftNode(node(18))
+root.left.left.left.addLeftNode(node(20))
+c = root.left.left.left.left
+c.addLeftNode(node(19))
+c.left.addLeftNode(node(88))
+c.left.left.addLeftNode(node(99))
+
+root.addRightNode(node(64))
+
 root.left.addRightNode(node(47))
 root.right.addLeftNode(node(47))
 root.right.addRightNode(node(82))
-root.left.left.addLeftNode(node(18))
+
 root.left.left.addRightNode(node(35))
 root.left.right.addLeftNode(node(35))
 root.left.right.addRightNode(node(87))
