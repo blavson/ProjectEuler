@@ -45,31 +45,27 @@ class Tree():
 root = node(75)
 t = Tree(root)
 
-root.addLeftNode(node(95))
-root.left.addLeftNode(node(17))
-root.left.left.addLeftNode(node(18))
-root.left.left.left.addLeftNode(node(20))
-c = root.left.left.left.left
-c.addLeftNode(node(19))
-c.left.addLeftNode(node(88))
-c.left.left.addLeftNode(node(99))
 
-root.addRightNode(node(64))
+root.addLeftNode(node(95))  #root.left
+root.addRightNode(node(64)) # root.right
+root.left.addLeftNode(node(17)) #root.left.left
+root.left.addRightNode(node(47)) #root.left.right , root.right.left
+root.right.addRightNode(node(82)) #root.right.right
+root.right.left = root.left.right
+l_31 = root.left.left
+l_32 = root.left.right
+l_33 = root.right.right
 
-root.left.addRightNode(node(47))
-root.right.addLeftNode(node(47))
-root.right.addRightNode(node(82))
+l_31.addLeftNode(node(18))  #root.left.left.left
+l_31.addRightNode(node(35)) #root.left.left.right
+l_32.left = l_31.right
+l_32.addRightNode(node(87)) #root.left.right.right
+l_33.left = l_32.right
+l_32.addRightNode(node(10)) #root.right.right.right
 
-root.left.left.addRightNode(node(35))
-root.left.right.addLeftNode(node(35))
-root.left.right.addRightNode(node(87))
-root.left.left.left.addLeftNode(node(20))
-root.left.left.left.addRightNode(node(4))
-
-root.left.right.left.addLeftNode(node(4))
-root.left.right.left.addRightNode(node(82))
-
-
+root.left.left.left.addLeftNode(node(20)) #root.left.left.left.left
+root.left.left.left.addRightNode(node(4)) #root.left.left.left.right
+root.left.left.left.right = root.left.left.right.left
 
 t.printAll(root)
 print("S = ", t.s)
